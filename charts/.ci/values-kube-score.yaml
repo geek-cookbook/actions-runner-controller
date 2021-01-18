@@ -22,3 +22,7 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi  
+
+# Set the following to true to install cert-manager as a requirement to this chart
+certmanager:
+  enabled: true    

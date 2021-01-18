@@ -34,3 +34,9 @@ maintainers:
     - name: funkypenguin
       email: davidy@funkypenguin.co.nz
       url: https://www.funkypenguin.co.nz
+
+dependencies:
+  - name: cert-manager
+    version: 1.x
+    repository: https://charts.jetstack.io
+    condition: certmanager.enabled
