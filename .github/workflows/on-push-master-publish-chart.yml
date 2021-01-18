@@ -9,7 +9,7 @@ on:
       - 'charts/**' 
       - '.github/**'   
   workflow_dispatch:
-    
+
 env:
   KUBE_SCORE_VERSION: 1.10.0
   HELM_VERSION: v3.4.1
@@ -26,7 +26,7 @@ jobs:
       - name: Set up Helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.4.0
+          version: ${{ env.HELM_VERSION }}
 
       - name: Set up kube-score
         run: |
@@ -53,20 +53,20 @@ jobs:
       - name: Run chart-testing (list-changed)
         id: list-changed    
         run: |
-          changed=$(ct list-changed)
+          changed=$(ct list-changed --config charts/.ci/ct-config.yaml)
           if [[ -n "$changed" ]]; then
             echo "::set-output name=changed::true"
           fi
 
       - name: Run chart-testing (lint)
-        run: ct lint
+        run: ct lint --config charts/.ci/ct-config.yaml
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0
         if: steps.list-changed.outputs.changed == 'true'
 
       - name: Run chart-testing (install)
-        run: ct install  
+        run: ct install --config charts/.ci/ct-config.yaml
 
   publish-chart:
 
@@ -87,7 +87,7 @@ jobs:
       - name: Install Helm
         uses: azure/setup-helm@v1
         with:
-          version: v3.4.0
+          version: ${{ env.HELM_VERSION }}
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.1.0
