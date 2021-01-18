@@ -8,7 +8,7 @@ helm template --values charts/$chart/ci/ci-values.yaml charts/$chart | kube-scor
     --ignore-test deployment-has-poddisruptionbudget \
     --ignore-test deployment-has-host-podantiaffinity \
     --ignore-test pod-probes \
-    --container-image-tag \
+    --ignore-test container-image-tag \
     --enable-optional-test container-security-context-privileged \
     --enable-optional-test container-security-context-readonlyrootfilesystem \
     --ignore-test container-security-context

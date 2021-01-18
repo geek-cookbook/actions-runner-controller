@@ -40,7 +40,7 @@ jobs:
               --ignore-test deployment-has-host-podantiaffinity
               --ignore-test container-security-context
               --ignore-test pod-probes
-              --container-image-tag
+              --ignore-test container-image-tag
               --enable-optional-test container-security-context-privileged
               --enable-optional-test container-security-context-readonlyrootfilesystem
 
