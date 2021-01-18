@@ -2,7 +2,6 @@
 # when parsing the chart
 image:
   pullPolicy: Always
-  tag: "notlatest" # :-) (We're just satisfying kube-score here!)  
 
 podSecurityContext:
   fsGroup: 2000
@@ -23,6 +22,6 @@ resources:
     cpu: 100m
     memory: 128Mi  
 
-# Set the following to true to install cert-manager as a requirement to this chart
-certmanager:
-  enabled: true    
+# Set the following to true to create a dummy secret, allowing the manager pod to start
+# This is only useful in CI
+createDummySecret: true

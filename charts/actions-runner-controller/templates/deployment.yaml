@@ -72,16 +72,11 @@ spec:
         - mountPath: "/etc/actions-runner-controller"
           name: controller-manager
           readOnly: true
+        - mountPath: /tmp
+          name: tmp         
         - mountPath: /tmp/k8s-webhook-server/serving-certs
           name: cert
           readOnly: true
-        readinessProbe:
-          failureThreshold: 6
-          httpGet:
-            path: /
-            port: webhook-server
-          initialDelaySeconds: 10
-          periodSeconds: 5              
       - args:
         - "--secure-listen-address=0.0.0.0:8443"
         - "--upstream=http://127.0.0.1:8080/"
@@ -97,13 +92,6 @@ spec:
           {{- toYaml .Values.resources | nindent 12 }}   
         securityContext:
           {{- toYaml .Values.securityContext | nindent 12 }}     
-        readinessProbe:
-          failureThreshold: 6
-          httpGet:
-            path: /
-            port: https
-          initialDelaySeconds: 10
-          periodSeconds: 5                             
       terminationGracePeriodSeconds: 10
       volumes:
       - name: controller-manager
@@ -113,6 +101,8 @@ spec:
         secret:
           defaultMode: 420
           secretName: webhook-server-cert
+      - name: tmp
+        emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
