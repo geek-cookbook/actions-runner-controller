@@ -66,6 +66,8 @@ spec:
           protocol: TCP
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}          
         volumeMounts:
         - mountPath: "/etc/actions-runner-controller"
           name: controller-manager
@@ -73,6 +75,13 @@ spec:
         - mountPath: /tmp/k8s-webhook-server/serving-certs
           name: cert
           readOnly: true
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /
+            port: webhook-server
+          initialDelaySeconds: 10
+          periodSeconds: 5              
       - args:
         - "--secure-listen-address=0.0.0.0:8443"
         - "--upstream=http://127.0.0.1:8080/"
@@ -80,9 +89,21 @@ spec:
         - "--v=10"
         image: gcr.io/kubebuilder/kube-rbac-proxy:v0.4.1
         name: kube-rbac-proxy
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: 8443
           name: https
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}   
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}     
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /
+            port: https
+          initialDelaySeconds: 10
+          periodSeconds: 5                             
       terminationGracePeriodSeconds: 10
       volumes:
       - name: controller-manager

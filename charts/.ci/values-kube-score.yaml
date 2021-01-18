@@ -1,0 +1,24 @@
+# This file sets some opinionated values for kube-score to use
+# when parsing the chart
+image:
+  pullPolicy: Always
+  tag: "notlatest" # :-) (We're just satisfying kube-score here!)  
+
+podSecurityContext:
+  fsGroup: 2000
+
+securityContext: 
+  capabilities:
+    drop:
+    - ALL
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+  runAsUser: 2000
+
+resources: 
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi  
