@@ -3,6 +3,26 @@ entries:
   actions-runner-controller:
   - apiVersion: v2
     appVersion: 0.16.0
+    created: "2021-01-18T08:27:10.332322955Z"
+    description: A Kubernetes controller that operates self-hosted runners for GitHub Actions on your Kubernetes cluster.
+    digest: caba624f252acaffe58aa31dad7b594e4bc37ae40b4c0e072ab1c70e0f1ac0d3
+    home: https://github.com/summerwind/actions-runner-controller
+    maintainers:
+    - email: contact@summerwind.jp
+      name: summerwind
+      url: https://github.com/summerwind
+    - email: davidy@funkypenguin.co.nz
+      name: funkypenguin
+      url: https://www.funkypenguin.co.nz
+    name: actions-runner-controller
+    sources:
+    - https://github.com/summerwind/actions-runner-controller
+    type: application
+    urls:
+    - https://github.com/geek-cookbook/actions-runner-controller/releases/download/actions-runner-controller-0.1.2/actions-runner-controller-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 0.16.0
     created: "2021-01-18T07:39:04.340725179Z"
     description: A Kubernetes controller that operates self-hosted runners for GitHub Actions on your Kubernetes cluster.
     digest: 8fed27c400197373acd8fc4c32b3fc46440de158de99cc6db16a44ac77259fb0
