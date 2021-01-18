@@ -70,4 +70,3 @@ jobs:
 
       - name: Run chart-testing (install)
         run: ct install --config charts/.ci/ct-config.yaml
-
