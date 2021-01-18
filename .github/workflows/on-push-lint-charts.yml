@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - 'charts/**' 
-      - '.github/**'            
+      - '.github/**'      
+  workflow_dispatch:
+        
 env:
   KUBE_SCORE_VERSION: 1.10.0
   HELM_VERSION: v3.4.1
